@@ -5,8 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    emacs-overlay = { 
-      url = "github:nix-community/emacs-overlay"; 
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
       flake = false;
     };
   };
@@ -20,9 +20,8 @@
           overlays = [ (import emacs-overlay) ];
         });
 
-        config = {
-          company.enable = true;
-        };
+        config = import ./config.nix;
+
       in rec {
         apps = rec {
           default = self.outputs.apps.${system}.emacs;
@@ -37,6 +36,6 @@
           emacs = pkgs.callPackage ./default.nix { inherit config; };
         };
 
-        devShells.default = pkgs.mkShell { packages = [packages.emacs]; };
+        devShells.default = pkgs.mkShell { packages = [ packages.emacs ]; };
       });
 }
