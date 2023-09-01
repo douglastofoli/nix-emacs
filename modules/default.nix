@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./base.nix ./warnings.nix ./company ];
+  imports = [ ./base.nix ./nogui.nix ./warnings.nix ./company ];
 }
