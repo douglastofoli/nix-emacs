@@ -46,7 +46,7 @@ in {
     target = mkOption {
       description = "";
       type = types.attrsOf types.package;
-      default = {};
+      default = { };
       visible = false;
     };
   };
