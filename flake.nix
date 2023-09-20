@@ -37,5 +37,7 @@
         };
 
         devShells.default = pkgs.mkShell { packages = [ packages.emacs ]; };
-      });
+      }) // {
+        hmModule = import ./modules/home-manager.nix inputs;
+      };
 }
