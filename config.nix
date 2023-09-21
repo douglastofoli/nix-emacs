@@ -9,5 +9,10 @@
     '';
   };
 
-  ui = { nogui = false; };
+  ui = {
+    nogui = false;
+    menuBar = false;
+    toolBar = false;
+    scrollBar = false;
+  };
 }

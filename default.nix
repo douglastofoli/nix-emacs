@@ -21,4 +21,3 @@ in traceWarnings input.config.warnings input.config.target.entrypoint // {
   inherit (input) config options;
   inherit (input.config.target) entrypoint;
 }
-

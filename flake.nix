@@ -5,38 +5,45 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, emacs-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     let inherit (flake-utils.lib) eachDefaultSystem mkApp;
     in eachDefaultSystem (system:
       let
-        pkgs = (import nixpkgs {
-          inherit system;
-          overlays = [ (import emacs-overlay) ];
-        });
-
+        lib = import ./lib.nix;
+        inherit (import ./overlays.nix { inherit lib; }) overlays;
+        pkgs = import nixpkgs { inherit system overlays; };
         config = import ./config.nix;
-
-      in rec {
-        apps = rec {
-          default = self.outputs.apps.${system}.emacs;
-          emacs = mkApp {
-            drv = self.outputs.packages.${system}.emacs;
+      in {
+        apps = {
+          default = self.outputs.apps.${system}.nix-emacs;
+          nix-emacs = mkApp {
+            drv = self.outputs.packages.${system}.nix-emacs;
             exePath = "/bin/emacs";
           };
         };
 
-        packages = rec {
-          default = self.outputs.packages.${system}.emacs;
-          emacs = pkgs.callPackage ./default.nix { inherit config; };
+        devShells.default = pkgs.mkShell {
+          buildInputs =
+            [ (pkgs.python3.withPackages (ps: with ps; [ PyGithub ])) ];
         };
 
-        devShells.default = pkgs.mkShell { packages = [ packages.emacs ]; };
+        packages = {
+          default = self.outputs.packages.${system}.nix-emacs;
+          nix-emacs = pkgs.callPackage self { inherit config; };
+        };
+
+        checks = import ./checks.nix { inherit system; } inputs;
       }) // {
         hmModule = import ./modules/home-manager.nix inputs;
       };
