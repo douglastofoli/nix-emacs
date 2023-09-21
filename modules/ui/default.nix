@@ -24,13 +24,15 @@ in {
 
   config = {
     initEl.pre = ''
-      ${writeIf (! config.ui.menuBar) ''
-        (menu-bar-mode -1)
-      ''} 
-      ${writeIf (! config.ui.toolBar) ''
+      ${
+        writeIf (!config.ui.menuBar) ''
+          (menu-bar-mode -1)
+        ''
+      } 
+      ${writeIf (!config.ui.toolBar) ''
         (tool-bar-mode -1)
       ''}
-      ${writeIf (! config.ui.scrollBar) ''
+      ${writeIf (!config.ui.scrollBar) ''
         (scroll-bar-mode -1)
       ''}
     '';

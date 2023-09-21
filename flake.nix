@@ -16,19 +16,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, emacs-overlay, ... }@inputs:
     let inherit (flake-utils.lib) eachDefaultSystem mkApp;
     in eachDefaultSystem (system:
       let
         lib = import ./lib.nix;
-        inherit (import ./overlays.nix { inherit lib; }) overlays;
+        inherit (import ./overlays.nix { inherit emacs-overlay lib; }) overlays;
         pkgs = import nixpkgs { inherit system overlays; };
         config = import ./config.nix;
       in {
         apps = {
-          default = self.outputs.apps.${system}.nix-emacs;
-          nix-emacs = mkApp {
-            drv = self.outputs.packages.${system}.nix-emacs;
+          default = self.outputs.apps.${system}.emacs;
+          emacs = mkApp {
+            drv = self.outputs.packages.${system}.emacs;
             exePath = "/bin/emacs";
           };
         };
@@ -39,12 +39,8 @@
         };
 
         packages = {
-          default = self.outputs.packages.${system}.nix-emacs;
-          nix-emacs = pkgs.callPackage self { inherit config; };
+          default = self.outputs.packages.${system}.emacs;
+          emacs = pkgs.callPackage self { inherit config; };
         };
-
-        checks = import ./checks.nix { inherit system; } inputs;
-      }) // {
-        hmModule = import ./modules/home-manager.nix inputs;
-      };
+      });
 }
