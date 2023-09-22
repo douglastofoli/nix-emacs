@@ -1,6 +1,11 @@
 {
   company.enable = true;
 
+  evil = {
+    enable = true;
+    collection = true;
+  };
+
   themes = {
     name = "catppuccin";
     customEl = ''

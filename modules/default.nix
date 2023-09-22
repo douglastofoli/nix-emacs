@@ -1,5 +1,6 @@
 { ... }:
 
 {
-  imports = [ ./base.nix ./warnings.nix ./company ./performance ./themes ./ui ];
+  imports =
+    [ ./base.nix ./warnings.nix ./company ./evil ./performance ./themes ./ui ];
 }
