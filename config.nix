@@ -6,6 +6,8 @@
     collection = true;
   };
 
+  helm.enable = true;
+
   themes = {
     name = "catppuccin";
     customEl = ''
