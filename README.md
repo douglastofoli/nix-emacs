@@ -26,11 +26,20 @@ You can install nix-emacs in your host by using the nix-emacs package instead th
   }: {
     nixosConfigurations.exampleHost = nixpkgs.lib.nixosSystem {
       system  = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      
       modules = [
         { 
           environment.systemPackages = 
             let
-              nix-emacs = nix-emacs.packages.${system}.default;
+              nix-emacs = nix-emacs.packages.${system}.default.override {
+                config = {
+                  package pkgs.emacs29;
+                };
+              };
             in [
               nix-emacs
             ];
