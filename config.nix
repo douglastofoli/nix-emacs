@@ -14,9 +14,12 @@
     };
   };
 
-  evil = {
-    enable = true;
-    collection = true;
+  editor = {
+    evil = {
+      enable = true;
+      collection = true;
+    };
+    fold.enable = true;
   };
 
   themes = {

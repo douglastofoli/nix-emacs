@@ -32,6 +32,7 @@ in {
       };
     };
   };
+
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages;
       [ ivy ] ++ (withPlugin cfg.counsel [ counsel ])

@@ -3,10 +3,10 @@
 {
   imports = [
     ./completion
+    ./editor
 
     ./base.nix
     ./warnings.nix
-    ./evil
     ./performance
     ./themes
     ./ui
