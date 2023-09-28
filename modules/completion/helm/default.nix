@@ -1,17 +1,19 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption types;
-  cfg = config.helm;
+  inherit (lib) mkEnableOption mkIf types;
+  cfg = config.completion.helm;
 in {
-  options.helm.enable = mkEnableOption {
-    description =
-      "Emacs incremental completion and selection narrowing framework";
-    type = types.bool;
-    default = false;
+  options = {
+    completion.helm.enable = mkEnableOption {
+      description =
+        "Emacs incremental completion and selection narrowing framework";
+      type = types.bool;
+      default = false;
+    };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages; [ helm ];
 
     initEl = {

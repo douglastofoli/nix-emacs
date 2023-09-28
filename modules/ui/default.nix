@@ -23,7 +23,7 @@ in {
   };
 
   config = {
-    initEl.pre = ''
+    initEl.pos = ''
       ${
         writeIf (!config.ui.menuBar) ''
           (menu-bar-mode -1)

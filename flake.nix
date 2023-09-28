@@ -23,7 +23,7 @@
         lib = import ./lib.nix;
         inherit (import ./overlays.nix { inherit emacs-overlay lib; }) overlays;
         pkgs = import nixpkgs { inherit system overlays; };
-        config = import ./config.nix;
+        config = import ./config.nix { inherit pkgs; };
       in {
         apps = {
           default = self.outputs.apps.${system}.emacs;

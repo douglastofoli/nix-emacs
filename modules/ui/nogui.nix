@@ -1,6 +1,8 @@
 { config, lib, ... }:
 
-let inherit (lib) mkIf mkOption types;
+let
+  inherit (lib) mkIf mkOption types;
+  cfg = config.ui;
 in {
   options.ui = {
     nogui = mkOption {
@@ -10,5 +12,5 @@ in {
     };
   };
 
-  config = mkIf config.ui.nogui { extraFlags = [ "-nw" ]; };
+  config = mkIf cfg.nogui { extraFlags = [ "-nw" ]; };
 }

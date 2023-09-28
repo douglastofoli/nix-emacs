@@ -15,18 +15,19 @@ in {
       default = "default";
     };
     initEl = {
+      description = "init.el parts for ordering";
       pre = mkOption {
         description = "init.el pre part for ordering";
         type = types.lines;
-        default = "";
+        default = "Usually used to configure plugins";
       };
       main = mkOption {
-        description = "init.el main part for ordering";
+        description = "Usually used to require plugins";
         type = types.lines;
         default = "";
       };
       pos = mkOption {
-        description = "init.el pos part for ordering";
+        description = "Usually used to initialize plugins";
         type = types.lines;
         default = "";
       };

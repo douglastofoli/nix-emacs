@@ -1,12 +1,23 @@
+{ pkgs, ... }:
+
 {
-  company.enable = true;
+  package = pkgs.emacs29;
+
+  completion = {
+    company.enable = true;
+    helm.enable = false;
+    ivy = {
+      enable = true;
+      counsel = true;
+      rich = true;
+      swiper = true;
+    };
+  };
 
   evil = {
     enable = true;
     collection = true;
   };
-
-  helm.enable = true;
 
   themes = {
     name = "catppuccin";
