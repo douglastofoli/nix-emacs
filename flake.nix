@@ -42,5 +42,7 @@
           default = self.outputs.packages.${system}.emacs;
           emacs = pkgs.callPackage self { inherit config; };
         };
-      });
+      }) // {
+        hmModule = import ./modules/home-manager.nix inputs;
+      };
 }

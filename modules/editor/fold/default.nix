@@ -16,8 +16,7 @@ in {
 
   config = mkIf cfg.fold.enable {
     plugins = with pkgs.emacsPackages;
-      [ vimish-fold ]
-      ++ (withPlugin cfg.evil.enable [ evil-vimish-fold ]);
+      [ vimish-fold ] ++ (withPlugin cfg.evil.enable [ evil-vimish-fold ]);
 
     initEl = {
       pre = ''
