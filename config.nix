@@ -23,11 +23,7 @@
   };
 
   themes = {
-    name = "catppuccin";
-    customEl = ''
-      (setq catppuccin-flavor 'mocha)
-      (catppuccin-reload)
-    '';
+    name = "dracula";
   };
 
   ui = {
