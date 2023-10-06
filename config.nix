@@ -35,5 +35,11 @@
     menuBar = false;
     toolBar = false;
     scrollBar = false;
+
+    which-key = {
+      enable = true;
+      keySeparator = " → ";
+      windowLocation = "botton";
+    };
   };
 }
