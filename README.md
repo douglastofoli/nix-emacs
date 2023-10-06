@@ -32,18 +32,22 @@ You can install nix-emacs in your host by using the nix-emacs package instead th
       };
       
       modules = [
+        let 
+          nix-emacs = nix-emacs.packages.${system}.default.override {
+            config = {
+              package = pkgs.emacs29;
+              
+              # copy and modify your configuration from `config.nix`
+            };
+          };
+        in
         { 
-          environment.systemPackages = 
-            let
-              nix-emacs = nix-emacs.packages.${system}.default.override {
-                config = {
-                  package pkgs.emacs29;
-                };
-              };
-            in [
-              nix-emacs
-            ];
+          services.emacs = {
+            enable = true;
+            package = nix-emacs;
+          };
         }
+
         # ...
       ];
     };
