@@ -45,7 +45,7 @@
     which-key = {
       enable = true;
       keySeparator = " → ";
-      windowLocation = "botton";
+      windowLocation = "bottom";
     };
   };
 }

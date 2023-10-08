@@ -4,8 +4,8 @@ let
   inherit (lib) mkEnableOption mkIf mkOption types withPlugin writeIf;
   cfg = config.ui.which-key;
 in {
-  options = {
-    ui.which-key = {
+  options.ui = {
+    which-key = {
       enable = mkEnableOption {
         description =
           "Emacs package that displays available keybindings in popup";
@@ -19,8 +19,8 @@ in {
       };
       windowLocation = mkOption {
         description = "Location of which-key window";
-        type = types.str;
-        default = "botton";
+        type = types.enum [ "top" "bottom" "left" "right" ];
+        default = "bottom";
       };
     };
   };
