@@ -29,6 +29,7 @@
       collection = true;
     };
     fold.enable = true;
+    snippets.enable = true;
   };
 
   themes = { name = "dracula"; };

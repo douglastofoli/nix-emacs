@@ -4,8 +4,8 @@ let
   inherit (lib) mkEnableOption mkIf mkOption types withPlugin writeIf;
   cfg = config.checkers.syntax;
 in {
-  options = {
-    checkers.syntax = {
+  options.checkers = {
+    syntax = {
       enable = mkEnableOption {
         description = "On the fly syntax checking for GNU Emacs";
         type = types.bool;

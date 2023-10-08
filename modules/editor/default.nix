@@ -1,1 +1,1 @@
-{ imports = [ ./evil ./fold ]; }
+{ imports = [ ./evil ./fold ./snippets ]; }
