@@ -20,21 +20,34 @@ in {
       type = types.bool;
       default = true;
     };
+    ringBell = mkOption {
+      description = "Ring bell";
+      type = types.bool;
+      default = true;
+    };
   };
 
   config = {
-    initEl.pos = ''
-      ${
-        writeIf (!config.ui.menuBar) ''
-          (menu-bar-mode -1)
-        ''
-      } 
-      ${writeIf (!config.ui.toolBar) ''
-        (tool-bar-mode -1)
-      ''}
-      ${writeIf (!config.ui.scrollBar) ''
-        (scroll-bar-mode -1)
-      ''}
-    '';
+    initEl = {
+      pre = ''
+        ${writeIf (!config.ui.ringBell) ''
+          (setq ring-bell-function #'ignore
+                visible-bell nil)
+        ''}
+      '';
+      pos = ''
+        ${
+          writeIf (!config.ui.menuBar) ''
+            (menu-bar-mode -1)
+          ''
+        } 
+        ${writeIf (!config.ui.toolBar) ''
+          (tool-bar-mode -1)
+        ''}
+        ${writeIf (!config.ui.scrollBar) ''
+          (scroll-bar-mode -1)
+        ''}
+      '';
+    };
   };
 }

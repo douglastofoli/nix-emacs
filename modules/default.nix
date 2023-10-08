@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./checkers
     ./completion
     ./editor
 

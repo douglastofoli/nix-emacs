@@ -3,6 +3,15 @@
 {
   package = pkgs.emacs29;
 
+  checkers = {
+    syntax = {
+
+      enable = true;
+      childframe = true;
+
+    };
+  };
+
   completion = {
     company.enable = true;
     helm.enable = false;
@@ -22,15 +31,15 @@
     fold.enable = true;
   };
 
-  themes = {
-    name = "dracula";
-  };
+  themes = { name = "dracula"; };
 
   ui = {
     nogui = false;
     menuBar = false;
     toolBar = false;
     scrollBar = false;
+
+    ringBell = false;
 
     which-key = {
       enable = true;
