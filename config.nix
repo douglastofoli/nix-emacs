@@ -32,9 +32,40 @@
     snippets.enable = true;
   };
 
-  themes = { name = "dracula"; };
+  emacs = {
+    dired = {
+      enable = true;
+      icons = true;
+      ranger = true;
+    };
+  };
 
   ui = {
+    fonts = {
+      default = {
+        font = "JetBrainsMono Nerd Font";
+        height = 110;
+        weight = "medium";
+      };
+      variablePitch = {
+        font = "Ubuntu";
+        height = 110;
+        weight = "medium";
+      };
+      fixedPitch = {
+        font = "JetBrainsMono Nerd Font";
+        height = 110;
+        weight = "medium";
+      };
+      fontLockCommentFace = "italic";
+      fontLockKeywordFace = "italic";
+      lineSpacing = 0.12;
+    };
+
+    emacs.themes.name = "dracula";
+
+    ligatures.enable = true;
+
     nogui = false;
     menuBar = false;
     toolBar = false;
@@ -44,8 +75,8 @@
 
     which-key = {
       enable = true;
-      keySeparator = " → ";
-      windowLocation = "bottom";
+      separator = " → ";
+      sideWindowLocation = "bottom";
     };
   };
 }

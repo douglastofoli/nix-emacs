@@ -66,7 +66,7 @@ in {
         ''}
 
         ${writeIf cfg.rich ''
-          (ivi-rich-mode 1)
+          (ivy-rich-mode 1)
         ''}
       '';
     };

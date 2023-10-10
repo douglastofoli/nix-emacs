@@ -4,14 +4,14 @@ let inherit (lib) mkOption optional types;
 in {
   imports = [ ./loader.nix ./themes.nix ];
 
-  options = {
+  options.ui.emacs = {
     themes = {
       available = mkOption {
         description = "Themes available to select";
         type = types.attrsOf (types.submodule ({ ... }: {
           options = {
             packages = mkOption {
-              description = "Packages required for the theme";
+              description = "The themes packages";
               type = types.listOf types.package;
               default = [ ];
             };
@@ -25,12 +25,12 @@ in {
         default = { };
       };
       name = mkOption {
-        description = "The theme to use";
+        description = "Name of the theme to apply to emacs";
         type = types.nullOr types.str;
         default = null;
       };
-      customEl = mkOption {
-        description = "Define custom elisp to configure theme";
+      customConfig = mkOption {
+        description = "Custom elisp to configure your theme";
         type = types.lines;
         default = "";
       };

@@ -12,12 +12,12 @@ in {
         type = types.bool;
         default = true;
       };
-      keySeparator = mkOption {
+      separator = mkOption {
         description = "Set the separator used between keys and descriptions";
         type = types.str;
         default = " → ";
       };
-      windowLocation = mkOption {
+      sideWindowLocation = mkOption {
         description = "Location of which-key window";
         type = types.enum [ "top" "bottom" "left" "right" ];
         default = "bottom";
@@ -30,8 +30,8 @@ in {
 
     initEl = {
       pre = ''
-        (setq which-key-separator "${cfg.keySeparator}")
-        (setq which-key-side-window-location '${cfg.windowLocation})
+        (setq which-key-separator "${cfg.separator}")
+        (setq which-key-side-window-location '${cfg.sideWindowLocation})
       '';
 
       main = ''

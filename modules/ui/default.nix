@@ -2,7 +2,7 @@
 
 let inherit (lib) mkIf mkOption types writeIf;
 in {
-  imports = [ ./which-key ./nogui.nix ];
+  imports = [ ./emacs ./ligatures ./which-key ./fonts.nix ./nogui.nix ];
 
   options.ui = {
     menuBar = mkOption {
