@@ -3,23 +3,31 @@
 let inherit (lib) literalExample mkOption types optional;
 in {
   options = {
-    extraFlags = mkOption {
-      description = "Extra flags to launch the entrypoint";
-      type = types.listOf types.str;
-      default = [ ];
-      example = literalExample " [ \"--\" \"-nw\" ] ";
-    };
-    identifier = mkOption {
-      description = "Unique identifier for the configuration";
-      type = types.str;
-      default = "default";
-    };
-    initEl = {
-      description = "init.el parts for ordering";
+    extraElisp = {
+      bindElisp = mkOption {
+        description = "Bind elisp";
+        type = types.lines;
+        default = "";
+      };
+      configElisp = mkOption {
+        description = "Configuration elisp";
+        type = types.lines;
+        default = "";
+      };
+      hookElisp = mkOption {
+        description = "Hook elisp";
+        type = types.lines;
+        default = "";
+      };
+      initElisp = mkOption {
+        description = "Initialize elisp";
+        type = types.lines;
+        default = "";
+      };
       pre = mkOption {
         description = "init.el pre part for ordering";
         type = types.lines;
-        default = "Usually used to configure plugins";
+        default = "";
       };
       main = mkOption {
         description = "Usually used to require plugins";
@@ -31,6 +39,17 @@ in {
         type = types.lines;
         default = "";
       };
+    };
+    extraFlags = mkOption {
+      description = "Extra flags to launch the entrypoint";
+      type = types.listOf types.str;
+      default = [ ];
+      example = literalExample " [ \"--\" \"-nw\" ] ";
+    };
+    identifier = mkOption {
+      description = "Unique identifier for the configuration";
+      type = types.str;
+      default = "default";
     };
     package = mkOption {
       description = "Emacs package to use";

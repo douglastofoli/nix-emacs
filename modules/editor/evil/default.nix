@@ -24,17 +24,17 @@ in {
     plugins = with pkgs.emacsPackages;
       [ evil ] ++ (withPlugin cfg.collection [ evil-collection ]);
 
-    initEl = {
-      pre = ''
+    extraElisp = {
+      configElisp = ''
         ${writeIf cfg.collection ''
           (setq evil-want-integration t)
           (setq evil-want-keybinding nil)
         ''}
-      '';
-      main = ''
+
         (require 'evil)
       '';
-      pos = ''
+
+      initElisp = ''
         (evil-mode 1)
 
         ${writeIf cfg.collection ''

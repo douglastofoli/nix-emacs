@@ -15,8 +15,8 @@ in {
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages; [ ligature ];
 
-    initEl = {
-      pre = ''
+    extraElisp = {
+      configElisp = ''
         (ligature-set-ligatures 't '("www"))
         (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
 
@@ -34,11 +34,11 @@ in {
                                              "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
                                              "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
                                              "\\\\" "://"))
-      '';
-      main = ''
+
         (require 'ligature)
       '';
-      pos = ''
+
+      initElisp = ''
         (global-ligature-mode t)
       '';
     };

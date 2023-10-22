@@ -2,7 +2,15 @@
 
 let inherit (lib) mkIf mkOption types writeIf;
 in {
-  imports = [ ./emacs ./ligatures ./which-key ./fonts.nix ./nogui.nix ];
+  imports = [
+    ./ligatures
+    ./themes
+    ./treemacs
+    ./which-key
+    ./workspaces
+    ./fonts.nix
+    ./nogui.nix
+  ];
 
   options.ui = {
     menuBar = mkOption {
@@ -28,14 +36,14 @@ in {
   };
 
   config = {
-    initEl = {
-      pre = ''
+    extraElisp = {
+      configElisp = ''
         ${writeIf (!config.ui.ringBell) ''
           (setq ring-bell-function #'ignore
                 visible-bell nil)
         ''}
       '';
-      pos = ''
+      initElisp = ''
         ${
           writeIf (!config.ui.menuBar) ''
             (menu-bar-mode -1)

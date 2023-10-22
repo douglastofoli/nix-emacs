@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption mkIf mkOption types withPlugin writeIf;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.ui.which-key;
 in {
   options.ui = {
@@ -28,17 +28,15 @@ in {
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages; [ which-key ];
 
-    initEl = {
-      pre = ''
+    extraElisp = {
+      configElisp = ''
         (setq which-key-separator "${cfg.separator}")
         (setq which-key-side-window-location '${cfg.sideWindowLocation})
-      '';
 
-      main = ''
         (require 'which-key)
       '';
 
-      pos = ''
+      initElisp = ''
         (which-key-mode 1)
       '';
     };

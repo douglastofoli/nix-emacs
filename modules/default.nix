@@ -10,6 +10,7 @@
     ./base.nix
     ./warnings.nix
     ./performance
+    ./tools
     ./ui
   ];
 }

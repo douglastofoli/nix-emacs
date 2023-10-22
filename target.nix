@@ -1,11 +1,11 @@
-{ pkgs, lib, config, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (builtins) concatStringsSep attrValues;
   inherit (pkgs) writeText;
 in {
   config = let
-    initEl = writeText "init-${config.identifier}.el"
-      (concatStringsSep "\n" (with config.initEl; [ pre main pos ]));
+    initEl = writeText "init-${config.identifier}.el" (concatStringsSep "\n"
+      (with config.extraElisp; [ initElisp hookElisp configElisp bindElisp ]));
     overrided = config.package.pkgs.withPackages config.plugins;
     flags = config.extraFlags;
   in {
