@@ -3,6 +3,28 @@
 let inherit (lib) literalExample mkOption types optional;
 in {
   options = {
+    extraElisp = {
+      bind = mkOption {
+        description = "Bind elisp";
+        type = types.lines;
+        default = "";
+      };
+      config = mkOption {
+        description = "Configuration elisp";
+        type = types.lines;
+        default = "";
+      };
+      hook = mkOption {
+        description = "Hook elisp";
+        type = types.lines;
+        default = "";
+      };
+      init = mkOption {
+        description = "Initialize elisp";
+        type = types.lines;
+        default = "";
+      };
+    };
     extraFlags = mkOption {
       description = "Extra flags to launch the entrypoint";
       type = types.listOf types.str;
@@ -13,24 +35,6 @@ in {
       description = "Unique identifier for the configuration";
       type = types.str;
       default = "default";
-    };
-    initEl = {
-      description = "init.el parts for ordering";
-      pre = mkOption {
-        description = "init.el pre part for ordering";
-        type = types.lines;
-        default = "Usually used to configure plugins";
-      };
-      main = mkOption {
-        description = "Usually used to require plugins";
-        type = types.lines;
-        default = "";
-      };
-      pos = mkOption {
-        description = "Usually used to initialize plugins";
-        type = types.lines;
-        default = "";
-      };
     };
     package = mkOption {
       description = "Emacs package to use";

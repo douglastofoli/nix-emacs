@@ -2,8 +2,8 @@
 
 {
   config = {
-    ui.emacs = {
-      themes.available = with pkgs.emacsPackages; {
+    ui.themes = {
+      available = with pkgs.emacsPackages; {
         catppuccin.packages = [ catppuccin-theme ];
         doom-one.packages = [ doom-themes ];
         dracula = {

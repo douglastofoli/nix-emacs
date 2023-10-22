@@ -15,8 +15,8 @@ in {
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages; [ yasnippet auto-yasnippet ];
 
-    initEl = {
-      pre = ''
+    extraElisp = {
+      bind = ''
         (global-set-key (kbd "C-c C-y w")   #'aya-create)
         (global-set-key (kbd "C-c C-y TAB") #'aya-expand)
         (global-set-key (kbd "C-c C-y SPC") #'aya-expand-from-history)
@@ -27,10 +27,12 @@ in {
         (global-set-key (kbd "C-c C-y s")   #'aya-persist-snippet)
         (global-set-key (kbd "C-c C-y o")   #'aya-open-line)
       '';
-      main = ''
+
+      config = ''
         (require 'yasnippet)
       '';
-      pos = ''
+
+      init = ''
         (yas-global-mode 1)
       '';
     };

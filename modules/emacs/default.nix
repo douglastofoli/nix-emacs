@@ -1,1 +1,1 @@
-{ imports = [ ./dired ]; }
+{ imports = [ ./dired ./undo ]; }

@@ -12,21 +12,28 @@ in {
         default = false;
       };
 
-      counsel = mkOption {
+      childframe = mkOption {
         description =
-          "A collection of Ivy-enhanced versions of common Emacs commands";
+          "Display Ivy windows in a child frame rather than an popup buffer";
         type = types.bool;
         default = false;
       };
 
-      rich = mkOption {
-        description = "More friendly interface for ivy";
+      fuzzy = mkOption {
+        description = "Enable fuzzy completion for Ivy searches";
         type = types.bool;
         default = false;
       };
 
-      swiper = mkOption {
-        description = "An Ivy-enhanced alternative to Isearch";
+      icons = mkOption {
+        description =
+          "Enable file icons for switch-{buffer,project}/find-file commands";
+        type = types.bool;
+        default = false;
+      };
+
+      prescient = mkOption {
+        description = "Enable prescient filtering and sorting for Ivy searches";
         type = types.bool;
         default = false;
       };
@@ -35,39 +42,45 @@ in {
 
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages;
-      [ ivy ] ++ (withPlugin cfg.counsel [ counsel ])
-      ++ (withPlugin cfg.rich [ ivy-rich ])
-      ++ (withPlugin cfg.swiper [ swiper ]);
+      [ amx counsel counsel-projectile ivy ivy-avy ivy-hydra ivy-rich swiper wgrep ]
+      ++ (withPlugin cfg.fuzzy [ flx ])
+      ++ (withPlugin (cfg.childframe && !config.ui.nogui) [ ivy-posframe ])
+      ++ (withPlugin cfg.icons [ nerd-icons-ivy-rich ])
+      ++ (withPlugin cfg.prescient [ ivy-prescient ]);
 
-    initEl = {
-      pre = ''
-        (setq ivy-use-virtual-buffers t)
-        (setq enable-recursive-minibuffers t)
+    extraElisp = {
+      config = ''
+        (setq ivy-use-virtual-buffers t
+              enable-recusive-minibuffers t)
 
-        ;; Ivy
+        (global-set-key "\C-s" 'swiper)
         (global-set-key (kbd "C-c C-r") 'ivy-resume)
         (global-set-key (kbd "<f6>") 'ivy-resume)
+        (global-set-key (kbd "M-x") 'counsel-M-x)
+        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+        (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+        (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+        (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+        (global-set-key (kbd "<f1> l") 'counsel-find-library)
+        (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+        (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+        (global-set-key (kbd "C-c g") 'counsel-git)
+        (global-set-key (kbd "C-c j") 'counsel-git-grep)
+        (global-set-key (kbd "C-c k") 'counsel-ag)
+        (global-set-key (kbd "C-x l") 'counsel-locate)
+        (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+        (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
-        ;; Swiper
-        ${writeIf cfg.swiper ''
-          (global-set-key "\C-s" 'swiper)
-        ''}
+        (require 'counsel nil t)
       '';
-      main = ''
-        ${writeIf cfg.rich ''
-          (require 'ivy-rich)
-        ''}
-      '';
-      pos = ''
-        (ivy-mode 1)
 
-        ${writeIf cfg.counsel ''
-          (counsel-mode 1)
-        ''}
+      init = ''
+        (ivy-mode)
 
-        ${writeIf cfg.rich ''
+        (with-eval-after-load 'ivy
+          (counsel-mode)
           (ivy-rich-mode 1)
-        ''}
+          (nerd-icons-ivy-rich-mode 1))
       '';
     };
   };

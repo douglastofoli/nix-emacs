@@ -1,25 +1,27 @@
 { pkgs, ... }:
 
 {
-  package = pkgs.emacs29;
+  package = pkgs.emacs;
 
   checkers = {
     syntax = {
-
       enable = true;
       childframe = true;
-
     };
   };
 
   completion = {
-    company.enable = true;
+    company = {
+      enable = true;
+      childframe = true;
+    };
     helm.enable = false;
     ivy = {
       enable = true;
-      counsel = true;
-      rich = true;
-      swiper = true;
+      childframe = true;
+      fuzzy = true;
+      icons = true;
+      prescient = true;
     };
   };
 
@@ -37,6 +39,18 @@
       enable = true;
       icons = true;
       ranger = true;
+    };
+
+    undo = {
+      enable = true;
+      tree = true;
+    };
+  };
+
+  tools = {
+    magit = {
+      enable = true;
+      forge = true;
     };
   };
 
@@ -62,7 +76,12 @@
       lineSpacing = 0.12;
     };
 
-    emacs.themes.name = "dracula";
+    themes.name = "dracula";
+
+    treemacs = {
+      enable = true;
+      lsp = true;
+    };
 
     ligatures.enable = true;
 
@@ -78,5 +97,7 @@
       separator = " → ";
       sideWindowLocation = "bottom";
     };
+
+    workspaces.enable = true;
   };
 }

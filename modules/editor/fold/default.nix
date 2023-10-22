@@ -18,14 +18,12 @@ in {
     plugins = with pkgs.emacsPackages;
       [ vimish-fold ] ++ (withPlugin cfg.evil.enable [ evil-vimish-fold ]);
 
-    initEl = {
-      pre = ''
+    extraElisp = {
+      config = ''
         ${writeIf cfg.evil.enable ''
           (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
         ''}
-      '';
 
-      main = ''
         (require 'vimish-fold)
 
         ${writeIf cfg.evil.enable ''
@@ -33,7 +31,7 @@ in {
         ''}
       '';
 
-      pos = ''
+      init = ''
         (vimish-fold-global-mode 1)
 
         ${writeIf cfg.evil.enable ''

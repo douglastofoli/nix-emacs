@@ -33,24 +33,28 @@ in {
       ++ (withPlugin cfg.icons [ nerd-icons-dired ])
       ++ (withPlugin cfg.ranger [ dired-ranger ]);
 
-    initEl = {
-      pre = ''
+    extraElisp = {
+      bind = ''
         (eval-after-load "dired" '(progn
           (define-key dired-mode-map (kbd "C-c C-r") #'dired-rsync)))
       '';
-      main = ''
+
+      config = ''
         ${writeIf cfg.icons ''
           (require 'nerd-icons)
           (require 'nerd-icons-dired)
         ''}
       '';
-      pos = ''
-        (global-diff-hl-mode)
-        (diredfl-global-mode)
 
+      hook = ''
         ${writeIf cfg.icons ''
           (add-hook 'dired-mode-hook #'nerd-icons-dired-mode)
         ''}
+      '';
+
+      init = ''
+        (global-diff-hl-mode)
+        (diredfl-global-mode)
       '';
     };
   };

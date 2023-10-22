@@ -23,20 +23,23 @@ in {
     plugins = with pkgs.emacsPackages;
       [ flycheck ] ++ (withPlugin cfg.childframe [ flycheck-posframe ]);
 
-    initEl = {
-      main = ''
+    extraElisp = {
+      config = ''
         (require 'flycheck)
 
         ${writeIf cfg.childframe ''
           (require 'flycheck-posframe)
         ''}
       '';
-      pos = ''
-        (global-flycheck-mode)
 
+      hook = ''
         ${writeIf cfg.childframe ''
           (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
         ''}
+      '';
+
+      init = ''
+        (global-flycheck-mode)
       '';
     };
   };
