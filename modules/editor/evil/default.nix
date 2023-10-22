@@ -25,7 +25,7 @@ in {
       [ evil ] ++ (withPlugin cfg.collection [ evil-collection ]);
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         ${writeIf cfg.collection ''
           (setq evil-want-integration t)
           (setq evil-want-keybinding nil)
@@ -34,7 +34,7 @@ in {
         (require 'evil)
       '';
 
-      initElisp = ''
+      init = ''
         (evil-mode 1)
 
         ${writeIf cfg.collection ''

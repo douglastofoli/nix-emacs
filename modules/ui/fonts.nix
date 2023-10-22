@@ -76,7 +76,7 @@ in {
   };
 
   config = {
-    extraElisp.configElisp = ''
+    extraElisp.config = ''
       (set-face-attribute 'default nil
         :font "${cfg.default.font}"
         :height ${toString cfg.default.height}

@@ -11,7 +11,7 @@ in {
   };
 
   config = mkIf config.performance.startup.increase-gc-threshold {
-    extraElisp.configElisp = ''
+    extraElisp.config = ''
       (let (
         (gc-cons-threshold most-positive-fixnum)
         (file-name-handler-alist nil)

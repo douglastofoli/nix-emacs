@@ -19,7 +19,7 @@ in {
       [ vimish-fold ] ++ (withPlugin cfg.evil.enable [ evil-vimish-fold ]);
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         ${writeIf cfg.evil.enable ''
           (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
         ''}
@@ -31,7 +31,7 @@ in {
         ''}
       '';
 
-      initElisp = ''
+      init = ''
         (vimish-fold-global-mode 1)
 
         ${writeIf cfg.evil.enable ''

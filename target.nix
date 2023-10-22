@@ -5,7 +5,8 @@ let
 in {
   config = let
     initEl = writeText "init-${config.identifier}.el" (concatStringsSep "\n"
-      (with config.extraElisp; [ initElisp hookElisp configElisp bindElisp ]));
+      (with config.extraElisp;
+        [ config.extraElisp.config ] ++ [ init hook ] ++ [ bind ]));
     overrided = config.package.pkgs.withPackages config.plugins;
     flags = config.extraFlags;
   in {

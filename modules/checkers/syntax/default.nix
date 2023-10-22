@@ -24,7 +24,7 @@ in {
       [ flycheck ] ++ (withPlugin cfg.childframe [ flycheck-posframe ]);
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         (require 'flycheck)
 
         ${writeIf cfg.childframe ''
@@ -32,13 +32,13 @@ in {
         ''}
       '';
 
-      hookElisp = ''
+      hook = ''
         ${writeIf cfg.childframe ''
           (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
         ''}
       '';
 
-      initElisp = ''
+      init = ''
         (global-flycheck-mode)
       '';
     };

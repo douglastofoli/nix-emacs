@@ -26,7 +26,7 @@ in {
       [ undo-fu undo-fu-session ] ++ (withPlugin cfg.tree [ undo-tree ]);
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         (global-unset-key (kbd "C-z"))
         (global-set-key (kbd "C-z")   'undo-fu-only-undo)
         (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
@@ -42,7 +42,7 @@ in {
         (require 'undo-tree)
       '';
 
-      initElisp = ''
+      init = ''
         (undo-fu-session-global-mode)
 
         ${writeIf cfg.tree ''

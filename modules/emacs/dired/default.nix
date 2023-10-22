@@ -34,22 +34,25 @@ in {
       ++ (withPlugin cfg.ranger [ dired-ranger ]);
 
     extraElisp = {
-      bindElisp = ''
+      bind = ''
         (eval-after-load "dired" '(progn
           (define-key dired-mode-map (kbd "C-c C-r") #'dired-rsync)))
       '';
-      configElisp = ''
+
+      config = ''
         ${writeIf cfg.icons ''
           (require 'nerd-icons)
           (require 'nerd-icons-dired)
         ''}
       '';
-      hookElisp = ''
+
+      hook = ''
         ${writeIf cfg.icons ''
           (add-hook 'dired-mode-hook #'nerd-icons-dired-mode)
         ''}
       '';
-      initElisp = ''
+
+      init = ''
         (global-diff-hl-mode)
         (diredfl-global-mode)
       '';

@@ -26,14 +26,15 @@ in {
       [ company ] ++ (withPlugin cfg.childframe [ company-box ]);
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         ${writeIf cfg.childframe ''
           (require 'company-box)
         ''}
       '';
 
-      hookElisp = ''
+      hook = ''
         (add-hook 'after-init-hook 'global-company-mode)
+
         ${writeIf cfg.childframe ''
           (add-hook 'company-mode-hook 'company-box-mode)
         ''}

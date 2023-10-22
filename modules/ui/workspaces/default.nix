@@ -19,7 +19,7 @@ in {
     plugins = with pkgs.emacsPackages; [ persp-mode ];
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         (with-eval-after-load 'persp-mode
           (setq wg-morph-on nil)
           (setq persp-autokill-buffer-on-remove 'kill-weak)) 
@@ -27,7 +27,7 @@ in {
         (require 'persp-mode)
       '';
 
-      hookElisp = ''
+      hook = ''
         (with-eval-after-load 'persp-mode
           (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
       '';

@@ -29,14 +29,14 @@ in {
     plugins = with pkgs.emacsPackages; [ which-key ];
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         (setq which-key-separator "${cfg.separator}")
         (setq which-key-side-window-location '${cfg.sideWindowLocation})
 
         (require 'which-key)
       '';
 
-      initElisp = ''
+      init = ''
         (which-key-mode 1)
       '';
     };

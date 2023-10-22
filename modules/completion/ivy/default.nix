@@ -42,14 +42,14 @@ in {
 
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages;
-      [ amx counsel counsel-projectile ivy ivy-hydra ivy-rich swiper wgrep ]
+      [ amx counsel counsel-projectile ivy ivy-avy ivy-hydra ivy-rich swiper wgrep ]
       ++ (withPlugin cfg.fuzzy [ flx ])
       ++ (withPlugin (cfg.childframe && !config.ui.nogui) [ ivy-posframe ])
       ++ (withPlugin cfg.icons [ nerd-icons-ivy-rich ])
-      ++ (withPlugin cfg.prescient [ prescient ]);
+      ++ (withPlugin cfg.prescient [ ivy-prescient ]);
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         (setq ivy-use-virtual-buffers t
               enable-recusive-minibuffers t)
 
@@ -71,26 +71,16 @@ in {
         (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
         (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
-        (with-eval-after-load 'ivy
-          (setq ivy-initial-inputs-alist nil)
-
-          (ivy-set-display-transformer 'ivy-switch-buffer
-                                      'ivy-rich-switch-buffer-transformer))
-
         (require 'counsel nil t)
       '';
 
-      initElisp = ''
+      init = ''
         (ivy-mode)
 
         (with-eval-after-load 'ivy
           (counsel-mode)
           (ivy-rich-mode 1)
-          (nerd-icons-ivy-rich-mode 1)
-
-          (ivy-virtual-abbreviate 'full
-          ivy-rich-switch-buffer-align-virtual-buffer t
-          ivy-rich-path-style 'abbrev))
+          (nerd-icons-ivy-rich-mode 1))
       '';
     };
   };

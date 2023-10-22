@@ -17,17 +17,17 @@ in {
     plugins = with pkgs.emacsPackages; [ helm ];
 
     extraElisp = {
-      bindElisp = ''
+      bind = ''
         (global-set-key (kbd "M-x") #'helm-M-x)
         (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
         (global-set-key (kbd "C-x C-f") #'helm-find-files)
       '';
 
-      configElisp = ''
+      config = ''
         (require 'helm)
       '';
 
-      initElisp = ''
+      init = ''
         (helm-mode 1)
       '';
     };

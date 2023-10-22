@@ -16,7 +16,7 @@ in {
     plugins = with pkgs.emacsPackages; [ ligature ];
 
     extraElisp = {
-      configElisp = ''
+      config = ''
         (ligature-set-ligatures 't '("www"))
         (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
 
@@ -38,7 +38,7 @@ in {
         (require 'ligature)
       '';
 
-      initElisp = ''
+      init = ''
         (global-ligature-mode t)
       '';
     };

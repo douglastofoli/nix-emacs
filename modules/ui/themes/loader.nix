@@ -11,11 +11,11 @@ in {
   plugins = theme.packages;
 
   extraElisp = {
-    configElisp = ''
+    config = ''
       ${cfg.customConfig}
     '';
 
-    initElisp = ''
+    init = ''
       (load-theme '${cfg.name} :no-confirm)
     '';
   };

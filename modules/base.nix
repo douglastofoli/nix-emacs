@@ -4,38 +4,23 @@ let inherit (lib) literalExample mkOption types optional;
 in {
   options = {
     extraElisp = {
-      bindElisp = mkOption {
+      bind = mkOption {
         description = "Bind elisp";
         type = types.lines;
         default = "";
       };
-      configElisp = mkOption {
+      config = mkOption {
         description = "Configuration elisp";
         type = types.lines;
         default = "";
       };
-      hookElisp = mkOption {
+      hook = mkOption {
         description = "Hook elisp";
         type = types.lines;
         default = "";
       };
-      initElisp = mkOption {
+      init = mkOption {
         description = "Initialize elisp";
-        type = types.lines;
-        default = "";
-      };
-      pre = mkOption {
-        description = "init.el pre part for ordering";
-        type = types.lines;
-        default = "";
-      };
-      main = mkOption {
-        description = "Usually used to require plugins";
-        type = types.lines;
-        default = "";
-      };
-      pos = mkOption {
-        description = "Usually used to initialize plugins";
         type = types.lines;
         default = "";
       };

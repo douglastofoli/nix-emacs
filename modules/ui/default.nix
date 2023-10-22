@@ -37,13 +37,13 @@ in {
 
   config = {
     extraElisp = {
-      configElisp = ''
+      config = ''
         ${writeIf (!config.ui.ringBell) ''
           (setq ring-bell-function #'ignore
                 visible-bell nil)
         ''}
       '';
-      initElisp = ''
+      init = ''
         ${
           writeIf (!config.ui.menuBar) ''
             (menu-bar-mode -1)

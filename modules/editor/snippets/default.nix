@@ -16,7 +16,7 @@ in {
     plugins = with pkgs.emacsPackages; [ yasnippet auto-yasnippet ];
 
     extraElisp = {
-      bindElisp = ''
+      bind = ''
         (global-set-key (kbd "C-c C-y w")   #'aya-create)
         (global-set-key (kbd "C-c C-y TAB") #'aya-expand)
         (global-set-key (kbd "C-c C-y SPC") #'aya-expand-from-history)
@@ -28,11 +28,11 @@ in {
         (global-set-key (kbd "C-c C-y o")   #'aya-open-line)
       '';
 
-      configElisp = ''
+      config = ''
         (require 'yasnippet)
       '';
 
-      initElisp = ''
+      init = ''
         (yas-global-mode 1)
       '';
     };
