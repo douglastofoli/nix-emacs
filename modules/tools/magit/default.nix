@@ -7,13 +7,13 @@ in {
   options.tools = {
     magit = {
       enable = mkEnableOption {
-        description = "It's Magit! A Git Porcelain inside Emacs. ";
+        description = "It's Magit! A Git Porcelain inside Emacs";
         type = types.bool;
         default = false;
       };
 
       forge = mkOption {
-        description = "Work with Git forges from the comfort of Magit ";
+        description = "Work with Git forges from the comfort of Magit";
         type = types.bool;
         default = false;
       };

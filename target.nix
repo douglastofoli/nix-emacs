@@ -4,7 +4,7 @@ let
   inherit (pkgs) writeText;
 in {
   config = let
-    initEl = writeText "init-${config.identifier}.el" (concatStringsSep "\n"
+    extraElisp = writeText "init-${config.identifier}.el" (concatStringsSep "\n"
       (with config.extraElisp;
         [ config.extraElisp.config ] ++ [ init hook ] ++ [ bind ]));
     overrided = config.package.pkgs.withPackages config.plugins;
@@ -21,10 +21,10 @@ in {
         installPhase = ''
           cp -r ${overrided} $out
           chmod +w $out/bin/emacs
-          ls $out
+
           makeWrapper ${overrided}/bin/emacs $out/bin/emacs ${
             concatStringsSep " "
-            (map (v: ''--add-flags "${v}"'') (flags ++ [ "-l" initEl ]))
+            (map (v: ''--add-flags "${v}"'') (flags ++ [ "-l" extraElisp ]))
           }
         '';
       };
@@ -55,7 +55,7 @@ in {
               echo "(message (json-encode load-path))"
               echo
               echo
-              cat ${initEl}
+              cat ${extraElisp}
             } > $out/init.el
 
             {
