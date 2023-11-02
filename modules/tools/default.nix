@@ -1,1 +1,1 @@
-{ imports = [ ./magit ]; }
+{imports = [./lsp ./magit];}

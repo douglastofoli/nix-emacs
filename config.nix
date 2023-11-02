@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   package = pkgs.emacs;
 
   checkers = {
@@ -47,7 +45,18 @@
     };
   };
 
+  lang = {
+    elixir = {
+      enable = true;
+      lsp = true;
+      treeSitter = true;
+    };
+  };
+
   tools = {
+    lsp = {
+      enable = true;
+    };
     magit = {
       enable = true;
       forge = true;

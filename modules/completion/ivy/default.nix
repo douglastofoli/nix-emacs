@@ -42,8 +42,17 @@ in {
 
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages;
-      [ amx counsel counsel-projectile ivy ivy-avy ivy-hydra ivy-rich swiper wgrep ]
-      ++ (withPlugin cfg.fuzzy [ flx ])
+      [
+        amx
+        counsel
+        counsel-projectile
+        ivy
+        ivy-avy
+        ivy-hydra
+        ivy-rich
+        swiper
+        wgrep
+      ] ++ (withPlugin cfg.fuzzy [ flx ])
       ++ (withPlugin (cfg.childframe && !config.ui.nogui) [ ivy-posframe ])
       ++ (withPlugin cfg.icons [ nerd-icons-ivy-rich ])
       ++ (withPlugin cfg.prescient [ ivy-prescient ]);
