@@ -1,1 +1,1 @@
-{imports = [./editor.nix ./ui.nix];}
+{imports = [./editor.nix ./ui.nix ./which-key.nix];}

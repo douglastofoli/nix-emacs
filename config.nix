@@ -93,6 +93,21 @@
       scrollBar = false;
       ringBell = false;
     };
+
+    which-key = {  
+      enable = true;  
+      delay = 0.5;  
+      side = "bottom";  
+      sort = "alphabetical";  
+      custom-prefixes = {  
+        "C-c p" = "projectile";  
+        "C-c l" = "lsp";  
+        "C-c g" = "git";  
+        "C-x 8" = "unicode";  
+        "C-c &" = "snippets";
+        "C-c t" = "tasks";
+      };
+    };
   };
 
   lsp = {
